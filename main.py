@@ -24,12 +24,7 @@ def count_degree(edges):
                 degrees[this_edge] = 1
             else:
                 degrees[this_edge] += 1
-
-    even_degrees = {}
-    for i in degrees.keys():
-        if degrees[i] % 2 == 0:
-            even_degrees[i] = degrees[i]
-    return even_degrees
+    return degrees
 
 
 def selection_sort(degrees):
