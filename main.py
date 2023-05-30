@@ -27,24 +27,32 @@ def count_degree(edges):
     return degrees
 
 
+def frequency(degrees):
+    freq_dict = {}
+    for value in degrees.values():
+        freq_dict[value] = freq_dict.get(value, 0) + 1
+    return freq_dict
+
+
 def selection_sort(degrees):
-    arr = []
-    for i in degrees.keys():
-        arr.append(i)
-    for i in range(len(arr)):
+    items = list(degrees.items())
+    n = len(items)
+    for i in range(n - 1):
         min_idx = i
-        for j in range(i+1, len(arr)):
-            if arr[j] < arr[min_idx]:
+        for j in range(i + 1, n):
+            if items[j][1] < items[min_idx][1]:
                 min_idx = j
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
-    return arr
+        items[i], items[min_idx] = items[min_idx], items[i]
+    sorted_dict = dict(items)
+    return sorted_dict
 
 
 if '__main__' == __name__:
     edges = read_file()
     degrees = count_degree(edges)
+    freq = frequency(degrees)
     sorted_vertex = selection_sort(degrees)
     for i in sorted_vertex:
-        print("Vertex ", i, '\t', degrees[i], sep='')
-
-
+        print("Vertex", i, "degree is", degrees[i])
+    for n in freq:
+        print("Frequency of degree", n, "is", freq[n])
